@@ -1,37 +1,58 @@
-console.log("Hello world");
+//---- STRINGS ----//
 
-// Output for var: 3 3 3
-// for(var i = 0; i < 3; i++){
-//     setTimeout(function(){
-//         console.log(i);
-//     })
-// }
-// for(let i = 0; i < 3; i++){
-//     setTimeout(function(){
-//         console.log(i);
-//     })
-// }
-const fun = function(a, b) {
-    return a + b;
+const str1 = 'abc';
+const str2 = 'abc';
+console.log(`str == str2 is ${str1 == str2}`);
+console.log(`"abc" < "ab" is ${str1 < "s"}`);
+console.log(`"123" > 23 is ${"123" > 23}`);
+console.log(`"123" > "23" is ${"123" > "23"}`);
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+// If a logical expression contains both string and number, js will convert string to number.//
+// If string doesn't contain a number, the result of convertion will be NaN. 
+// In any logical expression, if there is NaN, then the result will be false. 
+console.log(`"abc" > 23 is ${"abc" > 23}`);
+console.log(`"abc" < 23 is ${"abc" > 23}`);
+console.log(`"abc" != 23 is ${"abc" != 23}`); // The actual expression is  ${!("abc" == 23)} so it gives "true" as a result. 
+///////////////////////////////////////////////////////////////////////////////////////////////
+console.log();
+function stringProcessing(str){
+    const strP = "" + str; 
+    console.log(`"${str}"[4] is ${str[4]}`);
+    console.log(`length of "${str}" is ${str.length}`);
+    console.log(`"${str}" includes "abc" is ${strP.includes("abc")}`);
+    console.log(`substring of "${str}" beginning from index 2 to index 5 is ${strP.substring(2, 5)}`);
+    console.log(`index of substring "ll" in the "${str}" is ${strP.indexOf("ll")}; last index of substring "ll" in the "${str}" is ${strP.lastIndexOf("ll")}`);
 }
+stringProcessing("abcd*lmn*ll(oo&&ttll");
+console.log();
 
-let a = 5;
+///////////////////////////////////////////////////////////////////////////////////////////////
 
-// console.log(a ** 2);
-// console.log(fun(10, 20));
-// console.log(a(10, 20)); error
-// console.log(fun ** 2); NaN - not a number
+function encode(num, base){
+    // base from 2 to 10
+    let res = "";
+    do{
+        const digit = Math.trunc(num % base); 
+        const symb = getSymbol(digit);
+        res = symb + res;
+        num = Math.trunc(num/base);
+    }while(num >= 1);
+    return res;
+}
+function getSymbol(digit){
+    // base from 2 to 10
+    return "" + digit; // it will work only for base <=10
+}
+console.log(encode(10, 2)); 
 
-console.log("12" + 12, '"12" + 12'); // JS defines that operattor + exists for strings, that's why number 12 will be converted to string.
-console.log("12" - 12); // JS defines that operattor - doesn't exist for strings, that's why string will be converted to number.
-console.log("ab" - 12); // NaN ... JS will try to convert ab to number and as a result of this there will be value NaN.
 
-// Sometimes there is a need for explicit convertion from a string to a number. 
-// One of the methods is unary plus "+", it is the simplest way for the explicit convertion of a string to a number.
- 
-console.log(`+"12" + 12 = ${+"12" + 12}`);
+/* Homework 
 
-// HW
-// 1. Using only two letters "a" "s" write the word "ananas".
-// 2. Write a function "calculator" that can perform any arithmetic operation on two numbers (+, -, *, /). 
-// 3. Write any example for running the following expression fun(5)(10, 3) and get any result.  
+Write function encode(num, codingString) 
+base = length of codingString 
+codingString - any string without repeated symbols, must validate codingString that the symbols in it aren't repeated!
+algorithm the same as specified above
+getSymbol(digit, codingString) using operator []
+
+*/
