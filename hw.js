@@ -1,13 +1,13 @@
 function encode(num, codingString){
     let check = checkString(codingString);
-    if(check == false){
+    if(check == false){                                             // [Daniel] simply if (!checkString(...)) { log error etc }
         console.log("Coding string contains repeated symbols!");
         return; 
     }
-    let base = baseCount(codingString);
+    let base = baseCount(codingString);                             // const base = codingString.length   // all is already counted
     let res = "";
     do{
-        const digit = Math.trunc(num % base); 
+        const digit = Math.trunc(num % base);                       // trunc is not needed here as explained at webnar
         const symb = getSymbol(digit, codingString);
         res = symb + res;
         num = Math.trunc(num/base);
@@ -22,7 +22,7 @@ function getSymbol(digit, codingString){
     return symb;
 }
 
-function baseCount(codingString){
+function baseCount(codingString){                                   // not needed at all
     const arrString = codingString.split(""); 
     let base = 0;
     for(let i = 0; i < arrString.length; i++){
@@ -38,7 +38,7 @@ function checkString(codingString){
     for(let i = 0; i < arrString.length; i++){
         for(let j = 0; j < arrString.length; j++){
             if(arrString[i] == arrString[j]){
-                count++;
+                count++;                                        // simply return false immedatelly
                 if(count > 1){
                     res = false; 
                 }
