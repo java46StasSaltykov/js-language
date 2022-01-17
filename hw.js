@@ -4,7 +4,7 @@ function encode(num, codingString){
         console.log("Coding string contains repeated symbols!");
         return; 
     }
-    let base = baseCount(codingString);
+    let base = codingString.length;
     let res = "";
     do{
         const digit = Math.trunc(num % base); 
@@ -15,20 +15,11 @@ function encode(num, codingString){
     return res;
 }
 
-console.log(encode(4, 'abcdev'));
+console.log(encode(6, 'abcde'));
 
 function getSymbol(digit, codingString){
     let symb = codingString[digit];
     return symb;
-}
-
-function baseCount(codingString){
-    const arrString = codingString.split(""); 
-    let base = 0;
-    for(let i = 0; i < arrString.length; i++){
-        base++;
-    }
-    return base;
 }
 
 function checkString(codingString){
