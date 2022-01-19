@@ -1,41 +1,23 @@
-function encode(num, codingString){
-    let check = checkString(codingString);
-    if(check == false){
-        console.log("Coding string contains repeated symbols!");
-        return; 
-    }
-    let base = codingString.length;
-    let res = "";
-    do{
-        const digit = Math.trunc(num % base); 
-        const symb = getSymbol(digit, codingString);
-        res = symb + res;
-        num = Math.trunc(num/base);
-    }while(num >= 1);
-    return res;
-}
+const arHW = [13, 28, 4, 15, 25, -10, 40, 17, 27];
 
-console.log(encode(6, 'abcde'));
+arHW.sort(function(a, b){
+    return (a % 2 - b % 2) || (a % 2 ? b - a : a - b);
+})
 
-function getSymbol(digit, codingString){
-    let symb = codingString[digit];
-    return symb;
-}
+console.log(arHW);
+console.log();
 
-function checkString(codingString){
-    const arrString = codingString.split(""); 
-    let count = 0;
-    let res = true;
-    for(let i = 0; i < arrString.length; i++){
-        for(let j = 0; j < arrString.length; j++){
-            if(arrString[i] == arrString[j]){
-                count++;
-                if(count > 1){
-                    res = false; 
-                }
-            }
+//////////////////////////////////////////////////////////////////////////
+
+function matrixTransp(matrix){
+    for(let i = 0; i < matrix.length; i++){
+        let row = '';
+        for(let j = 0; j < matrix[j].length; j++){
+            row = row + matrix[j][i] + '  '; 
         }
-        count = 0;
+        console.log(row);
     }
-    return res;
 }
+
+const matrix3 = [[1,2], [3,4], [5,6]];
+matrixTransp(matrix3);
