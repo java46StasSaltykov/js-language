@@ -10,13 +10,14 @@ console.log();
 //////////////////////////////////////////////////////////////////////////
 
 function matrixTransp(matrix){
-    for(let i = 0; i < matrix.length; i++){
-        let row = '';
-        for(let j = 0; j < matrix[j].length; j++){
-            row = row + matrix[j][i] + '  '; 
-        }
-        console.log(row);
-    }
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < i; j++) {
+           const tmp = matrix[i][j];
+           matrix[i][j] = matrix[j][i];
+           matrix[j][i] = tmp;
+        };
+     }
+     console.log(matrix);
 }
 
 const matrix3 = [[1,2], [3,4], [5,6]];
