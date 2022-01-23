@@ -1,94 +1,56 @@
-///////// ARRAYS /////////
+/////////////// forEach method ///////////////
 
-const ar = [2, 100, 9, 80];
-// ar.sort(function(a, b){
-//     return a - b;
-// });
+const ar = [-10, 2, -7, 80, 20];
+// wanted result: str (string) - "-10#2#-7#80#20"
 
-ar.sort((a,b) => a-b);
+/// solution based on substring
 
-console.log(`ar is ${ar.toString()}`);
+// let str = '';
+// ar.forEach(function(n){
+//     str += n + '#';
+// })
+// str = str.substring(0, str.length-1);
+//////////////////////////////////////////////
 
-/***************************************************************/
+/// solution based on forEach from second number
 
-///////// Adding element/s in the array /////////
+// const ar1 = ar.slice(1);
+// let str = '' + ar[0];
+// ar1.forEach(n => str += '#' + n);
+// console.log(str);
 
-ar[ar.length] = 200;  
-ar.push(300, 25);
-console.log(ar);
+/// printing out sequence number of element, element, length of array
 
-const ar1 = [-8, 30, -57];
-// ar.push(ar1); an array will be added as an element but not separated numbers.
-// if you want to add separated numbers - use a spread operator (shown below). 
+// 1 of 5 -> -10; ... 
+ar.forEach((n, i, a) => console.log(`${i + 1} of ${a.length} -> ${n}`));
 
-ar.push(...ar1);
-console.log(ar);
+/////////////// map method ///////////////
 
-// for adding elements in the beginning of an array there is the method "unshift". 
-// everything that was said about "push" will work for "unshift". 
+// use case of applying map method: you want to create new array with elements that are received as a result of some conversion
+// example: you want to get new array with elements that are multiplication on 2 of each source elements 
 
-const ar2 = [27, 35];
-ar.unshift(...ar2);
-console.log(ar);
+const ar2 = ar.map(n => n*2);
+console.log(ar2);
+const ar3 = ar.map((n, i, a) => `<li>${i + 1} of ${a.length} - ${n}</li>`);
+console.log(ar3);
 
-// method "splice" for inserting or replacing any elements in any place. 
-// first argument - index for inserting or replacing.
-// second argument - amount of the deleted elements, if it's 0 then splice will only insert and not delete. 
-// third argument - designates sequence of elements that are being inserted, like push/unshift.
+///////////////////////////////////////////////////////////////////////
 
-ar.splice(2, 0, 1, 2);
-console.log(ar);
+/* Homework #13
+task 1:
+write a function myForEach(array, callback-function)
+array - an array that is being iterated 
+callback-function - a function that will be called for each element of array
+callback-function should take three arguments: current element, current index, iterated array
+example of standard forEach - ar1.forEach(n => str += '#' + n);
+example of myForEach - myForEach(array, (n => str += '#' + n))
 
-// "ar.pop" removes/deletes always the last element in the array and return it wherever you command it to. 
-// "ar.shift" does the exact opposite of "pop". 
-
-let el = ar.pop();
-el = ar.shift();
-console.log(ar);
-ar.splice(3, 5); // removes 5 elements from index #3 and above. 
-console.log(ar);
-
-
-///////// TWO-DIMENSIONAL ARRAYS /////////
-
-const matrix1 = [[1,2,3], [4,5,6], [7,8,9], [10,11,12]];
-const matrix2 = [[100,20], [50,-5], [34,28]];
-
-function displayMatrix(matrix){
-    for(let i = 0; i < matrix.length; i++){
-        let row = '';
-        for(let j = 0; j < matrix[i].length; j++){
-            row = row + matrix[i][j] + '  '; 
-        }
-        console.log(row);
-    }
-}
-
-displayMatrix(matrix1);
-console.log();
-displayMatrix(matrix2);
-
-/**************************************************************
-
-Homework#12
-
-1. const arHW = [13, 28, 4, 15, 25, -10, 40, 17, 27] 
-
-The sorting is according to: even numbers first from the minimal to the maximal, after the odd ones from the maximal to the minimal.
-The result should be: [-10, 4, 28, 40, 27, 25, 17, 15, 13]
-Use ar.sort(), write the comparator. 
-A comparator returns: 
-(<0) if a < b
-(>0) if a > b
-(=0) if a = b
-
-2. Write
- function matrixTransp(matrix){
-    //TODO
-    return matrix with columns that are rows of the source matrix and rows that are columns of the source matrix.  
-}
-
-
-
-
+task 2:
+write method myMap
+same functionality as standard method map
+function myMap((array, callback-function))
+array - an array that is being iterated 
+callback-function - a function that will be called for each element of array
+callback-function should take three arguments: current element, current index, iterated array
+myMap will apply your method myForEach
 */

@@ -1,25 +1,30 @@
-const arHW = [13, 28, 4, 15, 25, -10, 40, 17, 27];
-
-arHW.sort(function(a, b){
-    return (a % 2 - b % 2) || (a % 2 ? b - a : a - b);
-})
-
-console.log(arHW);
-console.log();
-
-//////////////////////////////////////////////////////////////////////////
-
-function matrixTransp(matrix){
-    const res = [];
-
-    for (let i = 0; i < matrix[0].length; i++) {
-        res.push([]);
-        for(let j = 0; j < matrix.length; j++){
-            res[i].push(matrix[j][i]);
-        }
+function myForEach(array, callback){
+    let newElement;
+    for(let i = 0; i < array.length; i++){
+        newElement = callback(array[i], i, array);
     }
-    console.log(res);
-}
+};
 
-const matrix3 = [[1,2], [3,4], [5,6]];
-matrixTransp(matrix3);
+function myMap(array, callback){
+    const newArray = [];
+    for(let i = 0; i < array.length; i++){
+        newArray.push(callback(array[i], i, array));
+    }
+    return newArray;
+};
+
+function double(element){
+    let newElement = element * 2;
+    return newElement;
+};
+
+function addString(element){
+    let newElement = element + '$';
+    return newElement;
+};
+
+const arr = [1,2,3];
+myForEach(arr, addString);
+const arr2 = [1,2,3];
+const arr3 = myMap(arr, addString);
+console.log(arr3);
