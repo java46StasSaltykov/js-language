@@ -7,15 +7,13 @@ function myForEach(array, callback){
 
 function myMap(array, callback){
     const newArray = [];
-    for(let i = 0; i < array.length; i++){
-        newArray.push(callback(array[i], i, array));
-    }
+    myForEach(array, (element, i, array) => newArray.push(callback(element, i, array)));
     return newArray;
 };
 
 function double(element){
     let newElement = element * 2;
-    console.log(newElement);
+    // console.log(newElement);
     return newElement;
 };
 
@@ -26,6 +24,5 @@ function addString(element){
 
 const arr = [1,2,3];
 myForEach(arr, double);
-const arr2 = [1,2,3];
-const arr3 = myMap(arr, addString);
+const arr3 = myMap(arr, double);
 console.log(arr3);
