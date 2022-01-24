@@ -1,86 +1,42 @@
-/////////////// forEach method ///////////////
+const person1 = {id: 123, name: 'Moshe', address: {city: 'Lod', street: 'Sokolov'}};
+const person2 = {id: 123, name: 'Moshe', address: {city: 'Lod', street: 'Sokolov'}};
+const person3 = person1;
+console.log(`person1 == person2 is ${person1 === person2}`);
+console.log(`person1 == person3 is ${person1 === person3}`);
+// console.log(`"123" == 123 is ${"123" == 123}`);
+// console.log(`"123" === 123 is ${"123" === 123}`);
+console.log(`JSON.stringify(person1) === JSON.stringify(person2) is ${JSON.stringify(person1) === JSON.stringify(person2)}`);
+console.log(JSON.stringify(person1));
+console.log(person1.toString());
+console.log(`name of person1 is ${person1.name}`);
+console.log(`person1 lives in ${person1.address.city}`);
+Object.keys(person1).forEach(k => console.log(k)); // array of the object keys
+Object.values(person1).forEach(v => console.log(v)); // array of the object values
+Object.entries(person1).forEach(e => console.log(e)); // array of arrays - [key, value]
+console.log(Object.entries(person1)); // array of arrays without using forEach
 
-const ar = [-10, 2, -7, 80, 20];
-// wanted result: str (string) - "-10#2#-7#80#20"
+function createPerson(id, name, address){
+    return {id, name, address}
+}
 
-/// solution based on substring
+function createAddress(city, street){
+    return {city: city, street: street}
+    // also can be written: return {city, street}
+}
 
-// let str = '';
-// ar.forEach(function(n){
-//     str += n + '#';
-// })
-// str = str.substring(0, str.length-1);
-//////////////////////////////////////////////
+const persons = [
+    createPerson(123, 'Vasya', createAddress('Rehovot', 'Parshani')),
+    createPerson(124, 'Olya', createAddress('Rehovot', 'Pr. Plaut')),
+    createPerson(125, 'Tolya', createAddress('Tel-Aviv', 'Dizengoff'))
+]
 
-/// solution based on forEach from second number
+//////////////////////////////////////////////////////////////////////////
+/*
+Homework 14
+task 3:
+applying methods of arrays you should fing the persons living in rehovot and display them out
 
-const ar1 = ar.slice(1);
-let str = '' + ar[0];
-ar1.forEach(n => str += '#' + n);
-// console.log(str);
-
-/// printing out sequence number of element, element, length of array
-
-// 1 of 5 -> -10; ... 
-// ar.forEach((n, i, a) => console.log(`${i + 1} of ${a.length} -> ${n}`));
-
-/////////////// map method ///////////////
-
-// use case of applying map method: you want to create new array with elements that are received as a result of some conversion
-// example: you want to get new array with elements that are multiplication on 2 of each source elements 
-
-const ar2 = ar.map(n => n*2);
-// console.log(ar2);
-const ar3 = ar.map((n, i, a) => `<li>${i + 1} of ${a.length} - ${n}</li>`);
-// console.log(ar3);
-
-/////////////// filter method ///////////////
-
-const ar20 = [13,17,20,23,2,40];
-const arEvenOdd = ar20.filter((n, i, a) => a.length % 2 == 0 ? n % 2 == 0 : n % 2 == 1);
-// console.log(arEvenOdd);
-
-/////////////// reduce method ///////////////
-
-let res = ar20.reduce((res, cur) => res + cur, 0);
-console.log(res);
-const max = ar20.reduce((max, cur) => cur > max ? cur : max, ar20[0]);
-console.log(max);
-res = ar20.reduce((res, cur) => res + cur);
-console.log(res);
-
-// callback - function with three possible parameters: current element, current index, reference to array
-
-// if the user call doesn't contain a second argument, then the first element of the array will be considered 
-// as initial result (in this case iterating begins from the second element of the array)
-
-///////////////////////////////////////////////////////////////////////
-
-/* Homework #13
-task 1:
-write a function myForEach(array, callback-function)
-array - an array that is being iterated 
-callback-function - a function that will be called for each element of array
-callback-function should take three arguments: current element, current index, iterated array
-example of standard forEach - ar1.forEach(n => str += '#' + n);
-example of myForEach - myForEach(array, (n => str += '#' + n))
-
-task 2:
-write method myMap
-same functionality as standard method map
-function myMap((array, callback-function))
-array - an array that is being iterated 
-callback-function - a function that will be called for each element of array
-callback-function should take three arguments: current element, current index, iterated array
-myMap will apply your method myForEach
-
-
-
-/* Homework #14
-task 1:
-write method myFilter, the same as the previous methods
-
-task 2:
-write method myReduce which receives array, callback, initialResult
+task 4:
+move to the begining of the array the persons who don't live in rehovot using array methods
 
 */
