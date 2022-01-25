@@ -38,7 +38,7 @@ const ar3 = ar.map((n, i, a) => `<li>${i + 1} of ${a.length} - ${n}</li>`);
 
 const ar20 = [13,17,20,23,2,40];
 const arEvenOdd = ar20.filter((n, i, a) => a.length % 2 == 0 ? n % 2 == 0 : n % 2 == 1);
-// console.log(arEvenOdd);
+console.log(arEvenOdd);
 
 /////////////// reduce method ///////////////
 
@@ -73,7 +73,6 @@ array - an array that is being iterated
 callback-function - a function that will be called for each element of array
 callback-function should take three arguments: current element, current index, iterated array
 myMap will apply your method myForEach
-
 
 
 /* Homework #14
