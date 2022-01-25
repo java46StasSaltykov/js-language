@@ -34,7 +34,7 @@ const persons = [
 /*
 Homework 14
 task 3:
-applying methods of arrays you should fing the persons living in rehovot and display them out
+applying methods of arrays you should find the persons living in rehovot and display them out
 
 task 4:
 move to the begining of the array the persons who don't live in rehovot using array methods
