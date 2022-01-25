@@ -39,7 +39,7 @@ function myReduce(array, callback, startIndex){
     return result; 
 }
 
-/////////////////// different functions which were used to check self-made methods ///////////////////
+/////////////////// variations of callback functions ///////////////////
 
 function double(element){
     let newElement = element * 2;
