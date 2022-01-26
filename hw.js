@@ -20,10 +20,10 @@ function getPersonsCity(persons, city) {
 
 function movePersonsNoCityAtBeginning(persons, city) {
     persons.sort(function compare(a ,city){
-        if(a.address.city == b){
+        if(a.address.city == city){
             return 1;
         }
-        if(a.address.city != b){
+        if(a.address.city != city){
             return -1;
         }
         return 0; 
