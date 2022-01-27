@@ -22,16 +22,16 @@ function myFilter(array, callback){
     return newArray;
 };
 
-function myReduce(array, callback, initialValue ){
+function myReduce(array, callback, initialValue){
     let result;
     let i;
-    if(initialValue  === undefined){
+    if(initialValue === undefined){
         result = array[0];
         i = 1;
     }
     else{
         result = array[initialValue];
-        i = initialValue  + 1;
+        i = initialValue + 1;
     }
     for(i; i < array.length; i++){
         result = callback(result, array[i]);
