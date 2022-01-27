@@ -14,30 +14,19 @@ function myMap(array, callback){
 
 function myFilter(array, callback){
     const newArray = [];
-    myForEach(array, function(element, i, array){
-        if(callback(element, i, array) == true){
-            newArray.push(element);
-        }
-    });
+    myForEach(array, (element, i, array) => callback(element, i, array) && newArray.push(element));
     return newArray;
 };
 
 function myReduce(array, callback, initialValue){
-    let result;
-    let i;
     if(initialValue === undefined){
-        result = array[0];
-        i = 1;
+        initialValue = array[0];
+        array = array.slice(1);
     }
-    else{
-        result = array[initialValue];
-        i = initialValue + 1;
-    }
-    for(i; i < array.length; i++){
-        result = callback(result, array[i]);
-    }
-    return result; 
-}
+    let res = initialValue;
+    myForEach(array, (element, i, array) => res = callback(res, element, i, array));
+    return res; 
+};
 
 /////////////////// variations of callback functions ///////////////////
 
@@ -79,5 +68,5 @@ const arr4 = myFilter(arr, evens);
 console.log(arr4);
 const arr5 = myFilter(arr2, stringCheck);
 console.log(arr5);
-const arr6 = myReduce(arr, sumArray, 0);
+const arr6 = myReduce(arr, sumArray);
 console.log(arr6);
