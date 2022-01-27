@@ -30,7 +30,7 @@ function myReduce(array, callback, initialValue ){
         i = 1;
     }
     else{
-        result = array[initialValue ];
+        result = array[initialValue];
         i = initialValue  + 1;
     }
     for(i; i < array.length; i++){
