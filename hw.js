@@ -14,24 +14,22 @@ function createAddress(city, street) {
 };
 
 function getPersonsCity(persons, city) {
-    const persons1 = persons.filter(person => person.address.city == city);
-    console.log(persons1);
+    return persons.filter(person => person.address.city === city);
 };
 
 function movePersonsNoCityAtBeginning(persons, city) {
-    persons.sort(function compare(a ,city){
-        if(a.address.city == city){
-            return 1;
-        }
-        if(a.address.city != city){
-            return -1;
-        }
-        return 0; 
-    });
-    console.log(persons);
+    const personsRes = getPersonsCity(persons, city);
+    personsRes.unshift(...persons.filter(person => person.address.city !== city));
+    return personsRes;
 };
 
-getPersonsCity(persons, 'Rehovot');
-movePersonsNoCityAtBeginning(persons, 'Rehovot');
+console.log(getPersonsCity(persons, 'Rehovot'));
+console.log(movePersonsNoCityAtBeginning(persons, 'Rehovot'));
+console.log(getPersonsCity(persons, 'Rehovot').reduce((idMax, idCur) => idMax > idCur ? idMax : idCur).name);
+console.log(persons.map(person => person.address.city).reduce((count, current) => {count[current] === undefined ? count[current] = 1 : count[current]++; return count}, {}));
+
+
+
+
 
 
