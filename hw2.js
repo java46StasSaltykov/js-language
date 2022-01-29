@@ -15,9 +15,8 @@ console.log();
 
 function countBy(array, callbackFunction) {
     const result = array.map(callbackFunction).reduce((count, current) => {count[current] === undefined ? count[current] = 1 : count[current]++; return count}, {});
-    console.log(result);
     return result;
-}
+};
 
 const arr = [6.4, 7.3, 6.5, 6.9];  
 const arr1 = ['abcd', 'lmnr', 'ab', 'dddd'];
