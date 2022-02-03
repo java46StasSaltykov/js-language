@@ -1,98 +1,76 @@
-const person1 = {id: 123, name: 'Moshe', address: {city: 'Lod', street: 'Sokolov'}};
-const person2 = {id: 123, name: 'Moshe', address: {city: 'Lod', street: 'Sokolov'}};
-const person3 = person1;
-// console.log(`person1 == person2 is ${person1 === person2}`);
-// console.log(`person1 == person3 is ${person1 === person3}`);
-// console.log(`"123" == 123 is ${"123" == 123}`);
-// console.log(`"123" === 123 is ${"123" === 123}`);
-// console.log(`JSON.stringify(person1) === JSON.stringify(person2) is ${JSON.stringify(person1) === JSON.stringify(person2)}`);
-// console.log(JSON.stringify(person1));
-// console.log(person1.toString());
-// console.log(`name of person1 is ${person1.name}`);
-// console.log(`person1 lives in ${person1.address.city}`);
-// Object.keys(person1).forEach(k => console.log(k)); // array of the object keys
-// Object.values(person1).forEach(v => console.log(v)); // array of the object values
-// Object.entries(person1).forEach(e => console.log(e)); // array of arrays - [key, value]
-// console.log(Object.entries(person1)); // array of arrays without using forEach
-
-function createPerson(id, name, address){
-    return {id, name, address}
+const circle = {radius: 20, square: function() {
+        return 3.14 * (this.radius ** 2)
+}, perimeter: () => 2 * 3.14 * this.radius,
+toString: function(){
+        return `radious of this circle is ${this.radius}`
+}};
+console.log(`square=${circle.square()}, perimeter=${circle.perimeter()}`); 
+//circle.square will be converted to square(circle) where circle as argument value,
+// "this" is the hidden parameter in the function 
+// in any arrow function there is no "this"
+function square(circle) {
+        return 3.14 * (circle.radius ** 2);
 }
-
-function createAddress(city, street){
-    return {city: city, street: street}
-    // also can be written: return {city, street}
-}
-
-const persons = [
-    createPerson(123, 'Vasya', createAddress('Rehovot', 'Parshani')),
-    createPerson(124, 'Olya', createAddress('Rehovot', 'Pr. Plaut')),
-    createPerson(125, 'Tolya', createAddress('Tel-Aviv', 'Dizengoff'))
-]
-
-//////////////////////////////////////////////////////////////////////////
-
-// Classwork //
-/*
-input: ["lmn", "d", "d", "lmn", "a", "lmn", "a", "bc"]
-
-output: 
-lmn -> 3
-a -> 2
-d -> 2
-bc -> 1
-
-*/
-// creating object with key - unique element of array (string as an element of array)
-//                      value - occurances count
-// difference between: obj = {a: 123, d: "abc"}; const a = "d"; obj.a == 123  and  obj[a] === "abc";
-// obj.c = 10; -> obj = {a: 123, d: "abc", c: 10}
-
-function displayOccurances(array) {
-    const res = {};
-    for(let i = 0; i < array.length; i++){
-        if(res[array[i]] === undefined){    // string as content of array[i] occures first time
-            res[array[i]] = 1;
-        } else {
-            res[array[i]] = res[array[i]] + 1;
+console.log(`circle: ${circle}`)
+const circle1 = {radius: 20,  perimeter: function() {
+                return 2 * 3.14 * this.radius}
+        ,
+        toString: function(){
+                return `radious of this circle is ${this.radius}`
+        }};
+        //circle1.square(); error because the method square is not defined inside object circle1
+        function Circle(radius) {
+                this.radius = radius;
         }
-    }
-    Object.entries(res).sort((e1,e2) => {
-        const res = e2[1] - e1[1];
-        return res === 0 ? e1[0].localeCompare(e2[0]) : res;
-    }).forEach(e => console.log(`${e[0]} -> ${e[1]}`));
-};
+        Circle.prototype.square = function() {
+                return 3.14 * (this.radius ** 2);  
+        }
+        Circle.prototype.perimeter = function() {
+                return 2 * 3.14 * this.radius
+        }
+        Circle.prototype.toString = function() {
+                return `radius of this circle is ${this.radius}`
+        }
+        const circle10 = new Circle(10);
+        /*******************************************************HW #16 definition task 1 */
+//Write constructor Deferred
+        //         const d = new Deferred()
+// d.then(function(res){ console.log('1 ', res); return 'a'; });
 
-const ar = ["bc", "lmn", "d", "d", "lmn", "a", "lmn", "a"];
-displayOccurances(ar);
+// d.then(function(res){ console.log('2 ', res); return 'b'; });
 
-// Homework #15
-/*
-   task 1:
-   refactoring of displayOccurances function:
-   lines 53-59 should be a separated function, that function should apply standard methods like reduce
+// d.then(function(res){ console.log('3 ', res); return 'c'; });
+// d.resolve('hello');
+//Output: 
+//1 hello
+//2 a
+//3 b
+/********************************************************* */
+/*******************************************HW #16 definition task2 */
+//write constructor MyArray
+//const myArray = new MyArray(10);
+//myArray.get(index) - result 10
+//write method get getting an index value and returning common value
+// (set in constructor)
+//myArray.set(index, value); 
+//write method set that sets a given value at a given index
+//myArray.setValue(value) - sets new value in all elements of myArray
+//Example:
+// const myArray = new MyArray(10);
+// console.log(myArray.get(100)) // displayed out 10
+// myArray.set(100, 500)//sets 500 at index 100
+// console.log(myArray.get(200)) //displayed out 10
+// console.log(myArray.get(100)) //displayed out 500
+// myArray.setValue(300);
+// console.log(myArray.get(100)) //displayed out 300
+// console.log(myArray.get(200)) //displayed out 300
 
-
-   task 2:
-   write useful function countBy(array, callbackFunction) that returns an object with keys 
-   as grouping criteria and values as the occurance count
-   keys should be sorted (optional)
-   where array - any array, callback function - function returning grouping criteria
-   
-   examples: 
-   const arr = [6.4, 7.3, 6.5, 6.9];
-   const statistics = countBy(arr, element => Math.floor(element))
-   result: statistics -> {"6": 3, "7": 1}
-   
-   const arr = ['abcd', 'lmnr', 'ab', 'dddd']
-   const statistics = countBy(arr, element => element.length)
-   result: statistics -> {"4": 3, "2": 1}
-
-   const arr = [{age: 25, id: 123, name: 'Vasya'}, 
-                {age: 50, id: 123, name: 'Vasya'},
-                {age: 25, id: 123, name: 'Vasya'},
-                {age: 70, id: 123, name: 'Vasya'}]
-   const statistics = countBy(arr, element => element.age)
-   result: statistics -> {"25": 2, "50": 1, "70": 1}
-   
-*/
+/***************************************************************************** */
+Array.prototype.filter = function(callbackPredicate) {
+        console.log('Tel-Ran copyright')
+        const res = []
+       this.forEach((n, i, a) => callbackPredicate(n, i, a) && res.push(n));
+       return res;
+}
+const ar = [1, 2, 4, 5, 100];
+ar.filter(n => n % 2 !== 0).forEach(n => console.log(n));
