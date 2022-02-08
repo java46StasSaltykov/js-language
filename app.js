@@ -90,15 +90,15 @@ console.log(countOfPersonType(persons, 'WageEmployee'));
 
 
 // function computeSalaryBudget(persons) {
-//         let count = persons.reduce((acc, cur) => 'computeSalary' in cur === true ? acc = acc + cur.computeSalary() : acc , 0);
+//         let count = persons.reduce((acc, cur) => 'computeSalary' in cur == true ? acc = acc + cur.computeSalary() : acc , 0);
 //         return count;
 // };
-// console.log(computeSalaryBudget(persons));
+console.log(computeSalaryBudget(persons));
 
 
 function countChildrenKindergarden(persons, kindergarden) {
         let count = 0;
-        persons.forEach(element => 'getKinderGarden' in element === true && element.getKinderGarden() === kindergarden ? count++ : count);
+        persons.forEach(element => 'getKinderGarden' in element == true && element.getKinderGarden() === kindergarden ? count++ : count);
         return count;
 };
 console.log(countChildrenKindergarden(persons, 'Shalom'));
@@ -116,4 +116,4 @@ function computeSalaryBudget(persons) {
 
 // testOutput(WageEmployee.prototype.computeSalary.bind(person4), 2000);
 // testOutput(computeSalaryBudget.bind(undefined, persons), 3000);
-testOutput(countOfPersonType).bind(undefined, persons, 'Child', 3);
+// testOutput(countOfPersonType).bind(undefined, persons, 'Child', 3);
