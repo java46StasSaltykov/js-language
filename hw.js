@@ -1,17 +1,18 @@
 function getRandomNumber(min, max) {
-    let result = (min > max) ? 
-    Math.floor(Math.random() * (min - max + 1)) + max : 
-    Math.floor(Math.random() * (max - min + 1)) + min;
-    return Math.ceil(result);
+    if(min > max){
+        [max, min] = [min, max];
+    }
+    return Math.round(min + Math.random() * (max -min));
 };
-console.log(getRandomNumber(10,0));
+for(let i = 0; i < 10; i++) {
+    console.log(getRandomNumber(10,0));
+}
 
 /*******************************************************************/
 
-function concatinate(prefix) {
-    
+function concatenate(prefix) {
+    return (...args) => [prefix, ...args].join('');
 };
-
-// const concatApp = concatinate('App - ');
-// const concatMessage = concatApp('Test status: Done');
-// console.log(concatMessage);
+const concatApp = concatenate('App - ');
+const concatMessage = concatApp('Test status: Done');
+console.log(concatMessage);
